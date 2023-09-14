@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Raspisanie.MainPage" Title="Shedule"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             android:TabbedPage.ToolbarPlacement="Top"
+            android:TabbedPage.IsSwipePagingEnabled="True"
+            android:TabbedPage.IsSmoothScrollEnabled="True"
+            BarTextColor="DarkCyan">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="StyleForCollection" TargetType="CollectionView">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="WidthRequest" Value="320"/>
+                <Setter Property="Margin" Value="0,0,0,5"/>
+            </Style>
+            <Style x:Key="ButtonChangeTime" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="DarkCyan"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+
+    <ContentPage Title="{Binding TabbedItems[0]}">
+        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" HeightRequest="777">
+            <StackLayout VerticalOptions="CenterAndExpand">
+
+                <StackLayout BackgroundColor="DarkCyan" HorizontalOptions="Center" HeightRequest="35" WidthRequest="321" Margin="0,0,0,5">
+                    <Label Text="{Binding StatusDay}" TextColor="WhiteSmoke" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Понедельник" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Понедельник" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInMonday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteMonday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightMonday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionMonday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedMonday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Вторник" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Вторник" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInTuesday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteTuesday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightTuesday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionTuesday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedTuesday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Среда" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Среда" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInWednesday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteWednesday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightWednesday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionWednesday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedWednesday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Четверг" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Четверг" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInThursday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteThursday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightThursday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionThursday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedThursday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Пятница" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Пятница" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInFriday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteFriday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightFriday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionFriday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedFriday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Суббота" HeightRequest="30" BackgroundColor="DarkCyan" WidthRequest="240" Margin="0,0,5,5" 
+                    Command="{Binding CommandVisibilityDay}" CommandParameter="Суббота" CornerRadius="0" Padding="0"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="+" Padding="0" CornerRadius="0" 
+                    Margin="0,0,5,5" FontAttributes="Bold" FontSize="20" Clicked="AddInSaturday"/>
+                    <Button HeightRequest="30" WidthRequest="35" BackgroundColor="DarkCyan" Text="-" Padding="0" CornerRadius="0" 
+                    Margin="0,0,0,5" FontAttributes="Bold" FontSize="20" Clicked="DeleteSaturday"/>
+                </StackLayout>
+                <ScrollView HeightRequest="{Binding HeightSaturday}">
+                    <StackLayout>
+                        <CollectionView x:Name="collectionSaturday" Style="{StaticResource StyleForCollection}" SelectionMode="Single" IsVisible="true" SelectionChanged="SelectionChangedSaturday">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="135" BackgroundColor="WhiteSmoke">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <BoxView Grid.Row="0" Color="LightGray" HeightRequest="80" WidthRequest="200" HorizontalOptions="End"/>
+                                        <Label Grid.Row="0" Text="{Binding StartTime}" HorizontalOptions="End" ZIndex="1" Margin="55,0"/>
+                                        <BoxView Grid.Row="1" Color="White" HeightRequest="90" WidthRequest="290" TranslationY="-60"/>
+                                        <Label Grid.Row="1" Text="{Binding Couple}" Margin="20,0,0,0" TranslationY="-50"/>
+                                        <Label Grid.Row="1" Text="{Binding Teacher}" Margin="20,0,0,0" TranslationY="-25"/>
+                                        <Label Grid.Row="1" Text="{Binding Audience}" Margin="20,0,0,0" TranslationY="0"/>
+                                        <BoxView Grid.Row="2" Color="Gray" HeightRequest="80" WidthRequest="200" TranslationY="-120" HorizontalOptions="Start" ZIndex="-1"/>
+                                        <Label Grid.Row="2" Text="{Binding EndTime}" ZIndex="1" TextColor="WhiteSmoke" Margin="55,0" TranslationY="-60"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout BackgroundColor="DarkCyan" HorizontalOptions="Center" HeightRequest="35" WidthRequest="321">
+                    <Label x:Name="Status" Text="" TextColor="WhiteSmoke" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="{Binding TabbedItems[1]}">
+
+        <StackLayout>
+
+            <StackLayout Margin="0" Padding="0" VerticalOptions="CenterAndExpand" IsVisible="{Binding VisibilitySettingTime}">
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="1" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="oneStartCouple" Text="{Binding InitialTimeCouple[0]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeOneCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="oneEndCouple" Text="{Binding InitialTimeCouple[1]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeOneCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="2" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="twoStartCouple" Text="{Binding InitialTimeCouple[2]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeTwoCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="twoEndCouple" Text="{Binding InitialTimeCouple[3]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeTwoCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="3" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="threeStartCouple" Text="{Binding InitialTimeCouple[4]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeThreeCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="threeEndCouple" Text="{Binding InitialTimeCouple[5]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeThreeCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="4" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="fourStartCouple" Text="{Binding InitialTimeCouple[6]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeFourCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="fourEndCouple" Text="{Binding InitialTimeCouple[7]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeFourCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="5" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="fiveStartCouple" Text="{Binding InitialTimeCouple[8]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeFiveCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="fiveEndCouple" Text="{Binding InitialTimeCouple[9]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeFiveCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="6" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="sixStartCouple" Text="{Binding InitialTimeCouple[10]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeSixCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="sixEndCouple" Text="{Binding InitialTimeCouple[11]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeSixCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Margin="10" Padding="0">
+
+                        <StackLayout VerticalOptions="Center" Margin="0" Padding="0">
+                            <Label Text="7" FontSize="30" Margin="-8,0,0,0" Padding="0"/>
+                        </StackLayout>
+
+                        <Frame Margin="10,0" Padding="10" HeightRequest="70">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label Text="Начало пары"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label x:Name="sevenStartCouple" Text="{Binding InitialTimeCouple[12]}" Margin="0,0,5,0" FontSize="20"/>
+                                        <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetStartTimeSevenCouple"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    <Frame Padding="10" HeightRequest="70">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <StackLayout>
+                                <Label Text="Конец пары"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="sevenEndCouple" Text="{Binding InitialTimeCouple[13]}" FontSize="20" Margin="0,0,5,0"/>
+                                    <Button Text="Изменить" Style="{StaticResource ButtonChangeTime}" Clicked="ClickGetEndTimeSevenCopuple"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Image Source="info.png" HeightRequest="20" WidthRequest="20"/>
+                    <Label Text="После изменения времени перезагрузите приложение" Margin="10,0,0,0" VerticalTextAlignment="Center" TextColor="DarkCyan"/>
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+        
+    </ContentPage>
+
+</TabbedPage>
