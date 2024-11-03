@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters ="clr-namespace:Shedule.Common.Converters"
+             x:Class="Shedule.Views.DataTemplatesView"
+             Title="DataTemplatesView" BackgroundColor="WhiteSmoke">
+    <ContentPage.Resources>
+        <converters:TimeOnlyToStringConverter x:Key="TimeOnlyToString"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Margin="10">
+
+            <!--ШАБЛОН ПРЕДМЕТОВ-->
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,5">
+                <Label Text="Шаблон предметов" TextColor="Gray" FontSize="20" VerticalTextAlignment="Center"/>
+                <Button Text="Add" TextColor="DarkCyan" BorderColor="DarkCyan" Command="{Binding OpenDisplayPromptAddSubjectCommand}"/>
+                <Button Text="Delete" TextColor="OrangeRed" BorderColor="OrangeRed" Command="{Binding DeleteSubjectCommand}" CommandParameter="{Binding SelectedSubject}"/>
+            </StackLayout>
+
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <CollectionView ItemsSource="{Binding SubjectTemplates}" MaximumHeightRequest="155" SelectedItem="{Binding SelectedSubject}" SelectionMode="Single"
+                        VerticalScrollBarVisibility="Always" Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding SubjectName}" Padding="10,0" FontSize="20" BackgroundColor="WhiteSmoke"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--ШАБЛОН ПРЕПОДАВАТЕЛЕЙ-->
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,5">
+                <Label Text="Шаблон преподавателей" TextColor="Gray" FontSize="20" VerticalTextAlignment="Center"/>
+                <Button Text="Add" TextColor="DarkCyan" BorderColor="DarkCyan" Command="{Binding OpenDisplayPromptAddTeacherCommand}"/>
+                <Button Text="Delete" TextColor="OrangeRed" BorderColor="OrangeRed" Command="{Binding DeleteTeacherCommand}" CommandParameter="{Binding SelectedTeacher}"/>
+            </StackLayout>
+
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <CollectionView ItemsSource="{Binding TeacherTemplates}" MaximumHeightRequest="155" SelectedItem="{Binding SelectedTeacher}" SelectionMode="Single"
+                VerticalScrollBarVisibility="Always" Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding TeacherName}" Padding="10,0" FontSize="20" BackgroundColor="WhiteSmoke"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--ШАБЛОН МЕСТ ПРОВЕДЕНИЯ-->
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,5">
+                <Label Text="Шаблон мест проведения" TextColor="Gray" FontSize="20" VerticalTextAlignment="Center"/>
+                <Button Text="Add" TextColor="DarkCyan" BorderColor="DarkCyan" Command="{Binding OpenDisplayPromptAddPlaceCommand}"/>
+                <Button Text="Delete" TextColor="OrangeRed" BorderColor="OrangeRed" Command="{Binding DeletePlaceCommand}" CommandParameter="{Binding SelectedPlace}"/>
+            </StackLayout>
+
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <CollectionView ItemsSource="{Binding PlaceTemplates}" MaximumHeightRequest="155" SelectedItem="{Binding SelectedPlace}" SelectionMode="Single"
+            VerticalScrollBarVisibility="Always" Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding PlaceName}" Padding="10,0" FontSize="20" BackgroundColor="WhiteSmoke"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--ШАБЛОН ЗВОНКОВ-->
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,5">
+                <Label Text="Шаблон звонков" TextColor="Gray" FontSize="20" VerticalTextAlignment="Center"/>
+                <Button Text="Add" TextColor="DarkCyan" BorderColor="DarkCyan" Command="{Binding OpenPageAddCallCommand}"/>
+                <Button Text="Delete" TextColor="OrangeRed" BorderColor="OrangeRed" 
+                    Command="{Binding DeleteCallCommand}" CommandParameter="{Binding SelectedCall}"/>
+            </StackLayout>
+
+            <Line X1="1" X2="400" Stroke="LightSlateGray" Margin="10,0"/>
+
+            <CollectionView ItemsSource="{Binding CallTemplates}" MaximumHeightRequest="155" SelectedItem="{Binding SelectedCall}" SelectionMode="Single"
+            VerticalScrollBarVisibility="Always" Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke">
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Номер пары:" Margin="10,0,0,0" FontSize="20" BackgroundColor="WhiteSmoke"/>
+                                <Label Text="{Binding NumberPara}" Margin="5,0,0,0" FontSize="20" BackgroundColor="WhiteSmoke"/>
+                            </StackLayout>
+
+                            <Label Text="Время пары:" FontSize="20" Margin="10,0,0,0"/>
+                            <Label Text="{Binding StartTime, Converter={StaticResource TimeOnlyToString}}" 
+                               FontSize="20" Margin="5,0,0,0" TextDecorations="Underline"/>
+                            <Label Text="-" FontSize="20" Margin="5,0,0,0"/>
+                            <Label Text="{Binding EndTime, Converter={StaticResource TimeOnlyToString}}" FontSize="20" Margin="5,0,0,0" TextDecorations="Underline"/>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Инструкция:" VerticalOptions="EndAndExpand"/>
+            <Label Text="1. Перезапустить приложение после добавления диапазонов времени, чтобы они обновились."/>
+            <Label Text="2. Для корректного считывания диапазонов статус строкой, не заходите в существующие диапазоны времени."/>
+            
+            <Label Text="Пример: Пара 1. 09:00 - 10:30 --- Пара 2. 10:20 - 11:00." FontAttributes="Bold"/>
+
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>

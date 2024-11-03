@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Shedule.Views.AddCallPage"
+             Title="AddCallPage">
+
+    <StackLayout Margin="10">
+
+        <Label Text="Номер пары" FontSize="18"/>
+        <Entry Text="{Binding CallVM.NumberPara}" FontSize="18"/>
+
+        <Label Text="Время начала пары" FontSize="18"/>
+        <TimePicker Time="{Binding CallVM.StartTime}"/>
+        <Label Text="Время конца пары" FontSize="18"/>
+        <TimePicker Time="{Binding CallVM.EndTime}"/>
+
+        <Button Text="Добавить" VerticalOptions="EndAndExpand" BackgroundColor="DarkCyan" HeightRequest="40" WidthRequest="200"
+                 Command="{Binding AddCallCommand}" CommandParameter="{Binding CallVM}"/>
+
+    </StackLayout>
+
+</ContentPage>
